@@ -1,0 +1,24 @@
+ip local pool [pool-name]ip_inicio ip_final (Rango de ip que se va a asignar)
+aaa new-model
+aaa authentication login [login-name] local
+aaa authorization network [nombre] local
+username [usuario] secret [contraseña]
+crypto isakmp policy 10
+encryption aes 256
+hash sha
+authentucation pre-share
+group 5
+crypto isakmp client configuration group [nombre]
+key [password]
+pool [pool-name]
+crypto ipsec transform-set setvpn esp-aes esp-sha-hma
+crypto dynamic-map [map-name] 10
+set transform-set setvpn
+reverse-route
+crypto map [mapavpn] client configuration address respond 
+crypto map [mapavpn] client authorization list [login-name]
+crypto map [mapavpn] isakmp authorization list [nombre]
+crypto map [mapavpn] 20 ipsec-isakmp dynamic [map-name]
+//Configurar la interfaz de salida a internet
+int f0/1
+crypto map [mapavpn]
