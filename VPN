@@ -16,7 +16,7 @@ crypto dynamic-map [map-name] 10
 set transform-set setvpn
 reverse-route
 crypto map [mapavpn] client configuration address respond 
-crypto map [mapavpn] client authorization list [login-name]
+crypto map [mapavpn] client authentication list [login-name]
 crypto map [mapavpn] isakmp authorization list [nombre]
 crypto map [mapavpn] 20 ipsec-isakmp dynamic [map-name]
 //Configurar la interfaz de salida a internet
